@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a0c8c9cf-609e-4dc1-a971-0297cc33a2fd" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/iterate_sign_gradient.pdf" afterPath="$PROJECT_DIR$/images/iterate_sign_gradient.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adversarial.py" afterPath="$PROJECT_DIR$/adversarial.py" />
-    </list>
+    <list default="true" id="a0c8c9cf-609e-4dc1-a971-0297cc33a2fd" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,11 +12,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="adversarial.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="adversarial.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/adversarial.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="128" column="51" lean-forward="false" selection-start-line="128" selection-start-column="51" selection-end-line="128" selection-end-column="51" />
+            <state relative-caret-position="1540">
+              <caret line="126" column="38" lean-forward="true" selection-start-line="126" selection-start-column="38" selection-end-line="126" selection-end-column="38" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -28,11 +24,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="deepnn.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="deepnn.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/deepnn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="63" column="14" lean-forward="false" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="14" />
+            <state relative-caret-position="-277">
+              <caret line="56" column="32" lean-forward="true" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
               <folding>
                 <element signature="e#964#1002#0" expanded="true" />
               </folding>
@@ -53,7 +49,7 @@
       <file leaf-file-name="training.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/training.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
+            <state relative-caret-position="349">
               <caret line="50" column="24" lean-forward="false" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
               <folding />
             </state>
@@ -255,7 +251,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="824" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="824" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25894135" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -441,19 +437,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/adversarial_training.py" />
-    <entry file="file://$PROJECT_DIR$/deepnn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="63" column="14" lean-forward="false" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="14" />
-          <folding>
-            <element signature="e#964#1002#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/training.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
+        <state relative-caret-position="349">
           <caret line="50" column="24" lean-forward="false" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
           <folding />
         </state>
@@ -461,10 +447,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/adversarial.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="128" column="51" lean-forward="false" selection-start-line="128" selection-start-column="51" selection-end-line="128" selection-end-column="51" />
+        <state relative-caret-position="1540">
+          <caret line="126" column="38" lean-forward="true" selection-start-line="126" selection-start-column="38" selection-end-line="126" selection-end-column="38" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deepnn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-277">
+          <caret line="56" column="32" lean-forward="true" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
+          <folding>
+            <element signature="e#964#1002#0" expanded="true" />
           </folding>
         </state>
       </provider>
