@@ -1,6 +1,5 @@
 import argparse
 import sys
-import tempfile
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -34,36 +33,30 @@ def main(_):
     with tf.name_scope('loss'):
         loss = tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv)
 
-    x_gradient = tf.gradients(loss, x)
+    x_delta = tf.gradients(loss, x)
 
     with tf.name_scope('sign_gradient_update'):
-        sign_gradient_x = tf.stop_gradient(x - tf.sign(x_gradient) * learning_rate)
+        sign_gradient_x = tf.stop_gradient(x - tf.sign(x_delta) * learning_rate)
         sign_gradient_x = tf.clip_by_value(sign_gradient_x, 0, 1)
-
-    graph_location = tempfile.mkdtemp()
-    print('Saving graph to: %s' % graph_location)
-    train_writer = tf.summary.FileWriter(graph_location)
-    train_writer.add_graph(tf.get_default_graph())
 
     true_label = FLAGS.true_class
     target_label = FLAGS.target_class
-    restore_path = FLAGS.saved_model
 
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
+
         # Loaded trained model
         sess = tf.Session()
         sess.run(tf.initialize_all_variables())
         saver = tf.train.Saver()
+        saver.restore(sess, FLAGS.saved_model)
 
-        saver.restore(sess, restore_path)
-
-        # Choose 10 images labeled as "true class"
+        # Choose images labeled as "true class"
         [probs, preds] = sess.run([y_prob, prediction], feed_dict={
             x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0})
         images_indices = [i for i, y in enumerate(preds) if y == true_label]
         chosen_images_probs = [prob[true_label] for i, prob in enumerate(probs) if i in images_indices]
-        chosen_images = [image for i, image in enumerate(mnist.test.images) if i in images_indices][0:10]
+        chosen_images = [image for i, image in enumerate(mnist.test.images) if i in images_indices][0:FLAGS.num_images]
 
         np.save("images/chosen_images.npy", chosen_images)
         np.save("images/chosen_images_probs.npy", chosen_images_probs)
@@ -73,19 +66,22 @@ def main(_):
 
         pp = PdfPages("images/iterate_sign_gradient.pdf")
 
-        # update image one by one
+        # Create adversarial image one by one using iterative sign gradient method
+        # inspired by: http://slazebni.cs.illinois.edu/spring17/lec10_visualization.pdf
         for idx, image in enumerate(chosen_images):
             x_updated = image
             result = true_label
             distort_prob = 0
+            delta = image
             while result != target_label:
                 x_reshape = np.reshape(x_updated, [-1, 784])
-                x_updated = sess.run([sign_gradient_x], feed_dict={x: x_reshape, y_: [fake_label], keep_prob: 1.0})
+                delta, x_updated = sess.run([x_delta, sign_gradient_x],
+                                            feed_dict={x: x_reshape, y_: [fake_label], keep_prob: 1.0})
                 x_updated = np.reshape(x_updated, (1, 784))
                 result_prob, result = sess.run([y_prob, prediction], feed_dict={x: x_updated, keep_prob: 1.0})
                 distort_prob = result_prob[0][result]
             print("finishing image %d ....." % idx)
-            visualize_image(pp, image, x_updated[0], chosen_images_probs[idx], distort_prob)
+            visualize_image(pp, image, x_updated[0], delta, chosen_images_probs[idx], distort_prob)
 
         pp.close()
 
@@ -101,7 +97,7 @@ def reshape(pixels):
     return pixels
 
 
-def visualize_image(pp, original, adversarial, prob_correct, prob_ostrich):
+def visualize_image(pp, original, adversarial, delta, prob_correct, prob_ostrich):
     plt.figure(figsize=(15, 5))
 
     plt.subplot(131)
@@ -119,7 +115,7 @@ def visualize_image(pp, original, adversarial, prob_correct, prob_ostrich):
     plt.tight_layout()
 
     plt.subplot(132)
-    delta_pixels = original_pixels - adversarial_pixels
+    delta_pixels = reshape(delta)
     plt.imshow(delta_pixels)
     plt.title('delta')
     plt.tight_layout()
